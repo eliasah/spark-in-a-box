@@ -14,9 +14,9 @@ def main():
 
     parser.add_argument("--username", default="spark", help="User name which will be used in the containers.")
 
-    parser.add_argument("--anaconda-repository", default="https://repo.continuum.io/",
+    parser.add_argument("--anaconda-repository", default="https://repo.continuum.io/miniconda",
                         help="URL which should be used to download Anaconda installers.")
-    parser.add_argument("--anaconda", choices=["anaconda", "miniconda"], default="miniconda",
+    parser.add_argument("--anaconda-version", choices=["4.2.12"], default="4.2.12",
                         help="Anaconda version to be installed on all nodes.")
 
     parser.add_argument("--python", choices=["2", "3"], default="3")
@@ -38,7 +38,8 @@ def main():
 
     parser.add_argument("--scala", choices=["2.10", "2.11"], default="2.11",
                         help="Scala version which should be used to compile Spark.")
-    parser.add_argument("--spark", choices=["1.6.1", "2.0.0"], default="2.0.0",
+    parser.add_argument("--spark",
+                        choices=["1.6.1", "1.6.2", "1.6.3", "2.0.0", "2.0.1", "2.0.2", "2.1.0"], default="2.1.0",
                         help="Version of Spark which should be compiled.")
     parser.add_argument("--jdk", choices=["7", "8"], default="8",
                         help="JDK version."),

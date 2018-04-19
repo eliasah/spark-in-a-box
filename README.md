@@ -3,7 +3,7 @@ A simple commandline utility to generate Docker images for testing and developme
 ## Installation 
 
 ```
-pip install -e git://github.com/zero323/spark-in-a-box.git@v0.0.7#egg=sparkinabox
+pip install -e git://github.com/zero323/spark-in-a-box.git@v0.0.9#egg=sparkinabox
 ```
 
 ## Usage
@@ -13,26 +13,11 @@ pip install -e git://github.com/zero323/spark-in-a-box.git@v0.0.7#egg=sparkinabo
 ```
 usage: makebox [-h] [--username USERNAME]
                [--anaconda-repository ANACONDA_REPOSITORY]
-               [--anaconda {anaconda,miniconda}] [--python {2,3}]
+               [--anaconda-version {4.2.12}] [--python {2,3}]
                [--python-packages [PYTHON_PACKAGES [PYTHON_PACKAGES ...]]]
                [--with-mkl | --no-mkl] [--python-hashseed PYTHON_HASHSEED]
-               [--scala {2.10,2.11}] [--spark {1.6.1,2.0.0-preview}]
-               [--jdk {7,8}] [--hadoop-version HADOOP_VERSION]
-               [--with-hadoop-provided | --no-hadoop-provided]
-               [--with-hive | --no-hive] [--with-yarn | --no-yarn]
-               [--with-r | --no-r] --output-dir OUTPUT_DIR
-               [--docker-prefix DOCKER_PREFIX] [--docker-name DOCKER_NAME]
-               [--profile {local,standalone}]
-               [--client-entrypoint {spark-submit,spark-shell,pyspark,sparkR}]
-               [--mvn-artifacts [MVN_ARTIFACTS [MVN_ARTIFACTS ...]]]
-makebox: error: the following arguments are required: --output-dir
-➜  spark-in-a-box git:(jvm-deps) ✗ makebox --help
-usage: makebox [-h] [--username USERNAME]
-               [--anaconda-repository ANACONDA_REPOSITORY]
-               [--anaconda {anaconda,miniconda}] [--python {2,3}]
-               [--python-packages [PYTHON_PACKAGES [PYTHON_PACKAGES ...]]]
-               [--with-mkl | --no-mkl] [--python-hashseed PYTHON_HASHSEED]
-               [--scala {2.10,2.11}] [--spark {1.6.1,2.0.0-preview}]
+               [--scala {2.10,2.11}]
+               [--spark {1.6.1,1.6.2,1.6.3,2.0.0,2.0.1,2.0.2,2.1.0}]
                [--jdk {7,8}] [--hadoop-version HADOOP_VERSION]
                [--with-hadoop-provided | --no-hadoop-provided]
                [--with-hive | --no-hive] [--with-yarn | --no-yarn]
@@ -48,7 +33,7 @@ optional arguments:
   --anaconda-repository ANACONDA_REPOSITORY
                         URL which should be used to download Anaconda
                         installers.
-  --anaconda {anaconda,miniconda}
+  --anaconda-version {4.2.12}
                         Anaconda version to be installed on all nodes.
   --python {2,3}
   --python-packages [PYTHON_PACKAGES [PYTHON_PACKAGES ...]]
@@ -61,7 +46,7 @@ optional arguments:
                         default.See:
                         http://stackoverflow.com/q/36798833/1560062
   --scala {2.10,2.11}   Scala version which should be used to compile Spark.
-  --spark {1.6.1,2.0.0-preview}
+  --spark {1.6.1,1.6.2,1.6.3,2.0.0,2.0.1,2.0.2,2.1.0}
                         Version of Spark which should be compiled.
   --jdk {7,8}           JDK version.
   --hadoop-version HADOOP_VERSION
@@ -88,13 +73,14 @@ optional arguments:
                         A list of Maven artifacts which should be available on
                         each machine (space separated list in format
                         groupId:artifactId:version)
+
 ```
 
 ### Example session
 
 ```bash
 # Create docker files
-makebox --python-hashseed 323 --output-dir sparkinabox --profile standalone --spark 2.0.0-preview 
+makebox --python-hashseed 323 --output-dir sparkinabox --profile standalone --spark 2.1.0 
 cd sparkinabox
 # Build images
 make build
@@ -104,7 +90,7 @@ make up
 docker-compose scale worker=2
 # Submit PI example 
 docker-compose run client --master spark://master:7077 \
-               "/home/spark/spark-2.0.0-preview/examples/src/main/python/pi.py" 10
+               "/home/spark/spark-2.1.0/examples/src/main/python/pi.py" 10
 # Stop cluster
 make down
 ```
