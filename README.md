@@ -3,7 +3,7 @@ A simple commandline utility to generate Docker images for testing and developme
 ## Installation 
 
 ```
-pip install -e git://github.com/zero323/spark-in-a-box.git@v0.0.9#egg=sparkinabox
+pip install -e git+http://github.com/zero323/spark-in-a-box.git#egg=sparkinabox
 ```
 
 ## Usage
@@ -46,7 +46,7 @@ optional arguments:
                         default.See:
                         http://stackoverflow.com/q/36798833/1560062
   --scala {2.10,2.11}   Scala version which should be used to compile Spark.
-  --spark {1.6.1,1.6.2,1.6.3,2.0.0,2.0.1,2.0.2,2.1.0}
+  --spark {1.6.1,1.6.2,1.6.3,2.0.0,2.0.1,2.0.2,2.1.0,2.2.0,2.3.0,2.3.1}
                         Version of Spark which should be compiled.
   --jdk {7,8}           JDK version.
   --hadoop-version HADOOP_VERSION
@@ -80,7 +80,7 @@ optional arguments:
 
 ```bash
 # Create docker files
-makebox --python-hashseed 323 --output-dir sparkinabox --profile standalone --spark 2.1.0 
+makebox --python-hashseed 323 --output-dir sparkinabox --profile standalone --spark 2.3.0 
 cd sparkinabox
 # Build images
 make build
@@ -90,7 +90,7 @@ make up
 docker-compose scale worker=2
 # Submit PI example 
 docker-compose run client --master spark://master:7077 \
-               "/home/spark/spark-2.1.0/examples/src/main/python/pi.py" 10
+               "/home/spark/spark-2.3.0/examples/src/main/python/pi.py" 10
 # Stop cluster
 make down
 ```
