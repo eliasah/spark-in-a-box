@@ -79,7 +79,7 @@ def main():
     parser.add_argument("--output-dir", dest="output_dir", required=True,
                         help="Output directory to put Dockerfiles.")
 
-    parser.add_argument("--docker-prefix", dest="docker_prefix", default="zero323",
+    parser.add_argument("--docker-prefix", dest="docker_prefix", default="eliasah",
                         help="Image will be named {docker-prefix}/{docker-name}-{role}.")
     parser.add_argument("--docker-name", dest="docker_name", default="spark-sandbox")
 

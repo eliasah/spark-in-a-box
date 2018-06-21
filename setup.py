@@ -5,7 +5,7 @@ setup(
     name="sparkinabox",
     version=__version__,
     packages=find_packages("."),
-    url="https://github.com/zero323/spark-in-a-box",
+    url="https://github.com/eliasah/spark-in-a-box",
     license="MIT",
     author=__author__,
     author_email="",
